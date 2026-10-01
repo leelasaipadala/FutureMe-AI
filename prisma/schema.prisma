@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String   @id @default(cuid())
+  name                String
+  email               String   @unique
+  password            String?
+  image               String?
+  onboardingCompleted Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  profile             Profile?
+  goals               Goal[]
+  habits              Habit[]
+  events              Event[]
+  scenarios           Scenario[]
+  futureTimelines     FutureTimeline[]
+}
+
+model Profile {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  monthlyIncome     Float    @default(0)
+  monthlyExpenses   Float    @default(0)
+  savings           Float    @default(0)
+  savingsGoal       Float    @default(0)
+  financialGoals    String   @default("")
+  healthGoals       String   @default("")
+  relationshipGoals String   @default("")
+  careerGoals       String   @default("")
+  growthGoals       String   @default("")
+  otherGoals        String   @default("")
+  onboardingComplete Boolean @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Goal {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  description String?
+  category  String
+  priority  String
+  target    String?
+  status    String   @default("Not Started")
+  deadline  DateTime?
+  progress  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Habit {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title          String
+  icon           String
+  color          String
+  frequency      String
+  completedDates String // Stored as a JSON string array to simulate NoSQL arrays in SQLite easily
+  currentStreak  Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  date      DateTime
+  type      String
+  time      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Scenario {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  prompt    String
+  result    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FutureTimeline {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  year      Int
+  events    String // Stored as JSON string array
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
