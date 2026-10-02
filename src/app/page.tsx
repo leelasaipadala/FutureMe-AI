@@ -61,23 +61,74 @@ export default function Home() {
                 <div className="h-5 w-48 bg-muted rounded-lg mx-auto" />
               </div>
               {/* Mock dashboard */}
-              <div className="flex gap-3">
-                <div className="w-40 shrink-0 space-y-2">
+              <div className="flex gap-4">
+                <div className="w-32 shrink-0 space-y-1.5">
                   {["Dashboard","Timeline","Goals","Habits","Simulator"].map((l, i) => (
-                    <div key={i} className={`h-7 rounded-lg ${i === 0 ? "bg-primary/15" : "bg-muted/50"}`} />
+                    <div key={i} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg ${i === 0 ? "bg-primary text-white shadow-sm shadow-primary/30" : "text-muted-foreground hover:bg-muted/50 transition-colors"}`}>
+                      {l}
+                    </div>
                   ))}
                 </div>
-                <div className="flex-1 space-y-3">
-                  <div className="grid grid-cols-4 gap-2">
-                    {["bg-emerald-100","bg-sky-100","bg-amber-100","bg-rose-100"].map((c, i) => (
-                      <div key={i} className={`h-16 ${c} rounded-xl`} />
-                    ))}
+                <div className="flex-1 space-y-4">
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3 text-left">
+                      <div className="text-[10px] font-bold text-emerald-600 uppercase mb-1">Health Score</div>
+                      <div className="text-xl font-extrabold text-emerald-700">92%</div>
+                      <div className="text-[9px] text-emerald-600 mt-1 font-semibold">↑ 4% this week</div>
+                    </div>
+                    <div className="bg-sky-50 border border-sky-100 rounded-xl p-3 text-left">
+                      <div className="text-[10px] font-bold text-sky-600 uppercase mb-1">Savings Goal</div>
+                      <div className="text-xl font-extrabold text-sky-700">₹2.4L</div>
+                      <div className="text-[9px] text-sky-600 mt-1 font-semibold">On track for Dec</div>
+                    </div>
+                    <div className="bg-purple-50 border border-purple-100 rounded-xl p-3 text-left">
+                      <div className="text-[10px] font-bold text-purple-600 uppercase mb-1 flex items-center gap-1"><Sparkles className="w-3 h-3"/> AI Prediction</div>
+                      <div className="text-[11px] font-bold text-purple-700 leading-snug mt-1">Job ready in 4 months based on current study habits.</div>
+                    </div>
                   </div>
-                  <div className="h-32 bg-muted/30 rounded-xl border border-border" />
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="h-20 bg-muted/20 rounded-xl border" />
-                    <div className="h-20 bg-muted/20 rounded-xl border" />
-                    <div className="h-20 bg-muted/20 rounded-xl border" />
+                  
+                  <div className="bg-white rounded-xl border border-border p-4 text-left">
+                    <div className="flex justify-between items-center mb-4">
+                      <div className="text-xs font-bold text-foreground">Future Timeline Projection</div>
+                      <div className="text-[9px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold">Updated Today</div>
+                    </div>
+                    <div className="relative h-2 w-full bg-muted/40 rounded-full flex items-center">
+                      <div className="absolute left-0 h-full w-[45%] bg-gradient-to-r from-primary to-purple-500 rounded-full shadow-sm"></div>
+                      <div className="absolute left-[45%] w-3.5 h-3.5 bg-white border-2 border-primary rounded-full -translate-x-1/2 shadow-sm"></div>
+                    </div>
+                    <div className="flex justify-between mt-2 text-[9px] text-muted-foreground font-semibold">
+                      <span>Today</span>
+                      <span>Mid-point</span>
+                      <span>Goal Reached</span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white border border-border rounded-xl p-3 text-left">
+                      <div className="text-[10px] font-bold mb-2">Daily Habits</div>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 text-[10px] font-semibold text-muted-foreground">
+                          <div className="w-3.5 h-3.5 rounded bg-emerald-500 flex items-center justify-center shadow-sm"><CheckCircle2 className="w-2.5 h-2.5 text-white"/></div>
+                          Read 20 pages
+                        </div>
+                        <div className="flex items-center gap-2 text-[10px] font-semibold text-muted-foreground">
+                          <div className="w-3.5 h-3.5 rounded bg-emerald-500 flex items-center justify-center shadow-sm"><CheckCircle2 className="w-2.5 h-2.5 text-white"/></div>
+                          Code 2 hours
+                        </div>
+                        <div className="flex items-center gap-2 text-[10px] font-semibold text-muted-foreground">
+                          <div className="w-3.5 h-3.5 rounded bg-muted border border-border"></div>
+                          Workout 30m
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-amber-50 border border-amber-100 rounded-xl p-3 text-left">
+                      <div className="text-[10px] font-bold text-amber-700 mb-1 flex items-center gap-1">
+                        <Zap className="w-3 h-3" /> AI Insight
+                      </div>
+                      <p className="text-[10px] text-amber-800/90 leading-relaxed mt-1.5 font-medium">
+                        You've hit your coding goal 5 days in a row! If you maintain this pace, your skill level will reach "Intermediate" 2 weeks ahead of schedule.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
