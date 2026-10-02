@@ -21,12 +21,18 @@ export default function SignupPage() {
     if (!name || !email) return;
     
     setIsLoading(true);
-    const result = await signup(name, email);
-    
-    if (result.success) {
-      router.push("/onboarding");
-    } else {
-      alert(result.error);
+    try {
+      const result = await signup(name, email);
+      
+      if (result.success) {
+        router.push("/onboarding");
+      } else {
+        alert(result.error);
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network or Server Error: Could not connect to the database.");
       setIsLoading(false);
     }
   };

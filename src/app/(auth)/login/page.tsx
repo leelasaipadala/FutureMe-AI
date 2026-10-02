@@ -20,12 +20,18 @@ export default function LoginPage() {
     if (!email) return;
     
     setIsLoading(true);
-    const result = await login(email);
-    
-    if (result.success) {
-      router.push("/dashboard");
-    } else {
-      alert(result.error);
+    try {
+      const result = await login(email);
+      
+      if (result.success) {
+        router.push("/dashboard");
+      } else {
+        alert(result.error);
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network or Server Error: Could not connect to the database.");
       setIsLoading(false);
     }
   };
